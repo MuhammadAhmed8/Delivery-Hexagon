@@ -3,11 +3,14 @@ import { Entity } from "src/lib/entities/entity";
 export class Driver extends Entity {
 
     public name: string;
-    public isAssigned: boolean; 
-    public city: string; 
+    public isAssigned: boolean;
+    public city: string;
 
-    constructor(id: number){
+    constructor(id: number, name: string, isAssigned: boolean, city: string) {
         super(id);
+        this.name = name;
+        this.isAssigned = isAssigned;
+        this.city = city
     }
 
     public validate(): void {

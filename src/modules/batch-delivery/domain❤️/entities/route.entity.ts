@@ -8,14 +8,15 @@ import { Driver } from "./driver.entity";
 export class Route extends Entity{
 
     private readonly origin: Location;
-    private readonly trackingId: number;
+    private readonly trackingId: string;
+    private readonly title: string;
     private delivery: Delivery;
     private readonly stops: Array<Stop>
     private routeSpecification: RouteSpecification;
     private driver: Driver;
 
-
-    constructor(id: number, trackingId: number, routeSpecification: RouteSpecification){
+    
+    constructor(id: number, trackingId: string, routeSpecification: RouteSpecification){
         super(id);
 
         // can do some validations

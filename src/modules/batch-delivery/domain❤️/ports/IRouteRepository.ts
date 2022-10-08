@@ -9,7 +9,7 @@ export interface IRouteRepository{
 
     findAll(): Promise<Route[]>;
 
-    findById(): Promise<Route>;
+    findById(id: number): Promise<Route>;
 
     create(): Promise<Route>;
 

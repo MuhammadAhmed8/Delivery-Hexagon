@@ -18,7 +18,7 @@ export class Driver extends Entity {
     }
 
     public validate(): void {
-        throw new Error("Method not implemented.");
+        
     }
 
 }

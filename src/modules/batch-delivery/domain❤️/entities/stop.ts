@@ -13,6 +13,10 @@ export class Stop extends Entity{
     private readonly customerId: number;
     private status: StopStatus;
 
+    public validate(): void {
+        //perform validation
+    }
+
     public deliver(): void{
         
         if(this.status === StopStatus.DELIVERED){

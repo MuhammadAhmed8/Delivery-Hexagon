@@ -23,8 +23,6 @@ export class Route extends Entity{
     
     constructor(id: number, trackingId: string, title: string){
         super(id);
-
-        // can do some validations
         
         this.trackingId = trackingId;
         this.title = title;
@@ -32,7 +30,7 @@ export class Route extends Entity{
 
 
     public validate(): void {
-        throw new Error("Method not implemented.");
+        // perform some validation;
     }
 
     public assignDriver(driver: Driver): void {
@@ -45,6 +43,7 @@ export class Route extends Entity{
     }
 
     public deliverToStop(stopId: number){
+
         const stop: Stop = this.stops.find((stop)=>stop.id === stopId);
 
         if(!stop){
@@ -54,7 +53,6 @@ export class Route extends Entity{
         stop.deliver();
 
     }
-
 
     
 }

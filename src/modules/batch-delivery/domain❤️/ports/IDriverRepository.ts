@@ -9,10 +9,9 @@ export interface IDriverRepository{
 
     findAll(): Promise<Driver[]>;
 
-    findById(): Promise<Driver>;
+    findById(id: number): Promise<Driver>;
 
     create(): Promise<Driver>;
-
 
 
 }

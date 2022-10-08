@@ -1,5 +1,7 @@
 import { Post } from "@nestjs/common";
 import { Driver } from "../domain❤️/entities/driver.entity";
+import { Route } from "../domain❤️/entities/route.entity";
+import { IDriverRepository } from "../domain❤️/ports/IDriverRepository";
 import { IRouteRepository } from "../domain❤️/ports/IRouteRepository";
 import { RouteRespository } from "../persistence/repositories/RouteRepository";
 
@@ -13,12 +15,12 @@ export class DeliveryService {
         this._routeRepository = new RouteRespository();
     }
     
-    assignDriver(routeId: number, driverId: number) {
+    public async assignDriver(routeId: number, driverId: number): Promise<void> {
 
-        const Route = this._routeRepository.findById();
-        const driver: Driver = this._driverRepository();
+        const route: Route = await this._routeRepository.findById(routeId);
+        const driver: Driver = await this._driverRepository.findById(driverId);
 
-        Route.assignRoute();
+        route.assignDriver(driver);
 
         // publish(new RouteAssignedEvent());
 

@@ -21,8 +21,8 @@ export class RouteRespository implements IRouteRepository {
         */
 
         const routes : Route[] = [
-            new Route(1,'TA121', new RouteSpecification()),
-            new Route(2,'TA122', new RouteSpecification()),
+            new Route(1,'TA121','Route 1'),
+            new Route(2,'TA122', 'Route 2'),
         ]
 
         return routes;
@@ -36,14 +36,14 @@ export class RouteRespository implements IRouteRepository {
             - return domain entity (not table entity)
         */
 
-        const route : Route = new Route(1,'TA121', new RouteSpecification());
+        const route : Route = new Route(1,'TA121','Route 1');
         return route;
 
     }
 
-    public create(): Promise<Route> {
-        const route = new Route(1,'TA121', new RouteSpecification());
-        throw new Error("Method not implemented.");
+    public async create(): Promise<Route> {
+        const route: Route = new Route(1,'TA121','Route 1');
+        return route;
     }
     
 }

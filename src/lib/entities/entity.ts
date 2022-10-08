@@ -36,6 +36,8 @@ export abstract class Entity {
   
       return this.id ? this.id === object.id : false;
     }
+
+    public abstract validate(): void;
   
 
   

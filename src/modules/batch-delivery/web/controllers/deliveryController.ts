@@ -7,12 +7,13 @@ export class DeliveryController{
     private _deliveryService: DeliveryService;
 
     constructor(){
-        this.deliverService = new DeliveryService();
+        this._deliveryService = new DeliveryService();
     }
 
     @Post('/')
     public async assignRouteToDriver(){
-
+        
+        this._deliveryService.assignDriver();
     }
-    this.deliverService.assignRoute(vv)
+    
 }

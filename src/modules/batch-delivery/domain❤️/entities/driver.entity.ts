@@ -13,6 +13,10 @@ export class Driver extends Entity {
         this.city = city
     }
 
+    public isAvailable(){
+        return !this.isAssigned;
+    }
+
     public validate(): void {
         throw new Error("Method not implemented.");
     }

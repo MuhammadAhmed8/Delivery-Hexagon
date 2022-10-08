@@ -1,12 +1,15 @@
 
 export abstract class Entity {
 
-    protected id: number;
+    protected _id: number;
+
+    public get id() : number {
+      return this._id;
+    }
 
 
     constructor(id) {
-      this.id = id;
-      this.validate();
+      this._id = id;
     }
   
   
@@ -34,11 +37,7 @@ export abstract class Entity {
       return this.id ? this.id === object.id : false;
     }
   
-  
-    /**
-     * Validate invariant
-     */
-    public abstract validate(): void;
+
   
   }
   

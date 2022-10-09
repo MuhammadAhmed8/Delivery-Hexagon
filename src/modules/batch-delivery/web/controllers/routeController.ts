@@ -25,12 +25,12 @@ export class RouteController extends BaseController{
             return this.fail(result.error,res);
         }
 
-        const responseDto: any = {
+        const viewModel: any = {
             data: result.getValue(),
             message: 'Route Assigned To Driver'
         }
 
-        return this.ok(responseDto, res);
+        return this.ok(viewModel, res);
 
     }
 
@@ -43,12 +43,12 @@ export class RouteController extends BaseController{
             return this.fail(result.error,res);
         }
 
-        const responseDto: any = {
+        const viewModel: any = {
             data: result.getValue(),
             message: 'Stop Delivered Successfully'
         }
 
-        return this.ok(responseDto, res);
+        return this.ok(viewModel, res);
 
     }
     

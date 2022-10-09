@@ -6,6 +6,7 @@ import { Location } from "../value-objects/location";
 import { Driver } from "./driver.entity";
 import { Result } from "src/lib/types/result";
 import { CustomError } from "src/lib/types/error";
+import { DomainErrors } from "../errors";
 
 export enum RouteStatus {
     'NOT_STARTED' = 1,
@@ -23,11 +24,12 @@ export class Route extends Entity{
     private readonly status: RouteStatus;
     private driver: Driver;
     
-    constructor(id: number, trackingId: string, title: string){
+    constructor(id: number, trackingId: string, title: string, stops: Stop[]){
         super(id);
         
         this.trackingId = trackingId;
         this.title = title;
+        this.stops = stops;
     }
 
 
@@ -38,7 +40,7 @@ export class Route extends Entity{
     public assignDriver(driver: Driver): Result<void> {
 
         if(!driver.isAvailable()){
-            return Result.fail<void>(new CustomError("DRIVER IS ALREADY ASSIGNED.",400));
+            return Result.fail<void>(DomainErrors.DriverAlreadyAssignedError);
         }
 
         this.driver = driver;
@@ -48,13 +50,13 @@ export class Route extends Entity{
 
     public deliverToStop(stopId: number): Result<void>{
 
-        const stop: Stop = this.stops.find((stop)=>stop.id === stopId);
+        const stop: Stop = this.stops.find((stop)=>stop.id == stopId);
 
         if(!stop){
-            return Result.fail<void>(new CustomError("STOP DOES NOT EXIST.",400));
+            return Result.fail<void>(DomainErrors.StopNotFoundError);
         }
 
-        stop.deliver();
+        return stop.deliver();
 
     }
 

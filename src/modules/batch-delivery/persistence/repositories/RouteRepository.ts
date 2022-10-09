@@ -1,14 +1,22 @@
 import { Route } from "../../domain❤️/entities/route.entity";
+import { Stop } from "../../domain❤️/entities/stop";
 import { IRouteRepository } from "../../domain❤️/ports/IRouteRepository";
 import { RouteSpecification } from "../../domain❤️/value-objects/routeSpecification";
 
 export class RouteRespository implements IRouteRepository {
 
-    private dbContext: any;
+    private fakeDb: any;
 
     constructor(){
 
         // mock database
+        const routes: Array<Route> = [];
+        routes.push(new Route(1,'TA121','Route 1', [new Stop(1), new Stop(2)]));
+        routes.push(new Route(2,'TA122', 'Route 2', [new Stop(3), new Stop(4)]));
+        
+        this.fakeDb = {
+            routes
+        }
     }
 
 
@@ -20,15 +28,10 @@ export class RouteRespository implements IRouteRepository {
             - return domain entity (not table entity)
         */
 
-        const routes : Route[] = [
-            new Route(1,'TA121','Route 1'),
-            new Route(2,'TA122', 'Route 2'),
-        ]
-
-        return routes;
+        return this.fakeDb.routes;
     }
 
-    public async findById(): Promise<Route> {
+    public async findById(routeId: number): Promise<Route> {
 
         /*
             - use typeorm/any orm to fetch and query
@@ -36,13 +39,13 @@ export class RouteRespository implements IRouteRepository {
             - return domain entity (not table entity)
         */
 
-        const route : Route = new Route(1,'TA121','Route 1');
-        return route;
+        const route : Route = this.fakeDb.routes.find((x)=>x.id == routeId);
 
+        return route;
     }
 
     public async create(): Promise<Route> {
-        const route: Route = new Route(1,'TA121','Route 1');
+        const route: Route = new Route(1,'TA121','Route 1', [new Stop(1), new Stop(2)]);
         return route;
     }
     

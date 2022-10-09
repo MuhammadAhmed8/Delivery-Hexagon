@@ -19,7 +19,7 @@ export class RouteService {
     }
     
     public async assignDriver(routeId: number, driverId: number): Promise<Result<void>> {
-
+        console.log("route id: ", routeId);
         const route: Route = await this._routeRepository.findById(routeId);
         const driver: Driver = await this._driverRepository.findById(driverId);
 
@@ -29,8 +29,15 @@ export class RouteService {
 
         return result;
 
-        // publish(new RouteAssignedEvent());
+    }
 
+    public async deliver(routeId: number, stopId: number): Promise<Result<void>> {
+
+        const route: Route = await this._routeRepository.findById(routeId);
+        console.log(route,"rrout")
+        const result: Result<void> = route.deliverToStop(stopId);
+
+        return result;
 
     }
 

@@ -34,5 +34,23 @@ export class RouteController extends BaseController{
         return this.ok(responseDto, res);
 
     }
+
+    @Put('/:id/stop/:stopId/delivery')
+    public async deliverToStop(@Param('id') routeId: number, @Param('stopId') stopId: number,  @Res() res: Response){
+        
+        const result: Result<void> = await this._routeService.deliver(+routeId, +stopId);
+
+        if(result.isFailure){
+            return this.fail(result.error,res);
+        }
+
+        const responseDto: any = {
+            data: result.getValue(),
+            message: 'Stop Delivered Successfully'
+        }
+
+        return this.ok(responseDto, res);
+
+    }
     
 }

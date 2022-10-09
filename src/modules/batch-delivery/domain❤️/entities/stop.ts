@@ -1,4 +1,6 @@
 import { Entity } from "src/lib/base/entities/entity";
+import { Result } from "src/lib/types/result";
+import { DomainErrors } from "../errors";
 import { Location } from "../value-objects/location";
 
 export enum StopStatus{
@@ -17,13 +19,15 @@ export class Stop extends Entity{
         //perform validation
     }
 
-    public deliver(): void{
+    public deliver(): Result<void>{
         
         if(this.status === StopStatus.DELIVERED){
-            throw new Error('Stop Already Delivered');
+            return Result.fail<void>(DomainErrors.StopAlreadyDeliveredError);
         }
 
         this.status = StopStatus.DELIVERED;
+
+        return Result.ok<void>();
     }
 
 

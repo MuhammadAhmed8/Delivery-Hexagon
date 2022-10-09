@@ -5,17 +5,13 @@ import { BaseController } from "src/lib/base/controller";
 import { Result } from "src/lib/types/result";
 import { AssignDriverCommand } from "../../application/commands/AssignDriverCommand";
 import { DeliverToStopCommand } from "../../application/commands/DeliverToStopCommand";
-import { RouteService } from "../../application/routeService"
 
 
 @Controller('/route')
 export class RouteController extends BaseController{
 
-    private _routeService: RouteService;
-
     constructor(private readonly _commandBus: CommandBus, private readonly _queryBus: QueryBus){
         super();
-        this._routeService = new RouteService();
     }
 
     @Put('/:id/driver')

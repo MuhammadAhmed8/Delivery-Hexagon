@@ -1,3 +1,4 @@
+import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Result } from 'src/lib/types/result';
 import { Driver } from 'src/modules/batch-delivery/domain❤️/entities/driver.entity';
@@ -11,15 +12,10 @@ import { AssignDriverCommand } from '../AssignDriverCommand';
 @CommandHandler(AssignDriverCommand)
 export class AssignDriverCommandHandler implements ICommandHandler<AssignDriverCommand> {
   
-    private readonly _routeRepository: IRouteRepository;
-    private _driverRepository: IDriverRepository;
-
-constructor(
-    
-  ) {
-    this._routeRepository = new RouteRespository();
-    this._driverRepository = new DriverRespository();
-  }
+  constructor(
+    @Inject('IRouteRepository') private readonly _routeRepository: IRouteRepository,
+    @Inject('IDriverRespository') private _driverRepository: IDriverRepository
+  ) {}
 
   async execute(command: AssignDriverCommand) {
     

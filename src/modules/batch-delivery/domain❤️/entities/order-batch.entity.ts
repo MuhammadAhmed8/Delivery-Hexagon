@@ -1,4 +1,4 @@
-import { Entity } from "src/lib/entities/entity";
+import { Entity } from "src/lib/base/entities/entity";
 
 export class OrderBatch extends Entity {
     private date: Date;

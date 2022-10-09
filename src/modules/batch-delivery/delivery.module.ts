@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
-import { DeliveryService } from "./application/deliveryService";
-import { DeliveryController } from "./web/controllers/deliveryController";
+import { RouteService } from "./application/routeService";
+import { RouteController } from "./web/controllers/routeController";
 
 @Module({
-    controllers: [DeliveryController],
-    providers: [DeliveryService]
+    controllers: [RouteController],
+    providers: [RouteService]
 })
 export class DeliveryModule {}

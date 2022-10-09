@@ -1,9 +1,11 @@
-import { Entity } from "src/lib/entities/entity";
+import { Entity } from "src/lib/base/entities/entity";
 import { Delivery } from "../value-objects/delivery";
 import { RouteSpecification } from "../value-objects/routeSpecification";
 import { Stop } from "./stop";
 import { Location } from "../value-objects/location";
 import { Driver } from "./driver.entity";
+import { Result } from "src/lib/types/result";
+import { CustomError } from "src/lib/types/error";
 
 export enum RouteStatus {
     'NOT_STARTED' = 1,
@@ -33,21 +35,23 @@ export class Route extends Entity{
         // perform some validation;
     }
 
-    public assignDriver(driver: Driver): void {
+    public assignDriver(driver: Driver): Result<void> {
 
-        if(driver.isAvailable()){
-            this.driver = driver;
+        if(!driver.isAvailable()){
+            return Result.fail<void>(new CustomError("DRIVER IS ALREADY ASSIGNED.",400));
         }
 
-        throw new Error("CANT ASSIGN TO THIS DRIVER");
+        this.driver = driver;
+        
+        return Result.ok<void>();
     }
 
-    public deliverToStop(stopId: number){
+    public deliverToStop(stopId: number): Result<void>{
 
         const stop: Stop = this.stops.find((stop)=>stop.id === stopId);
 
         if(!stop){
-            throw new Error('STOP DOES NOT EXIST.');
+            return Result.fail<void>(new CustomError("STOP DOES NOT EXIST.",400));
         }
 
         stop.deliver();

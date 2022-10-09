@@ -7,6 +7,7 @@ import { Driver } from "./driver.entity";
 import { Result } from "src/lib/types/result";
 import { CustomError } from "src/lib/types/error";
 import { DomainErrors } from "../errors";
+import { BadRequestException } from "@nestjs/common";
 
 export enum RouteStatus {
     'NOT_STARTED' = 1,
@@ -27,15 +28,15 @@ export class Route extends Entity{
     constructor(id: number, trackingId: string, title: string, stops: Stop[]){
         super(id);
         
+        // if(this.stops.length === 0){
+        //     throw new BadRequestException();
+        // }
+        
         this.trackingId = trackingId;
         this.title = title;
         this.stops = stops;
     }
 
-
-    public validate(): void {
-        // perform some validation;
-    }
 
     public assignDriver(driver: Driver): Result<void> {
 
@@ -44,7 +45,8 @@ export class Route extends Entity{
         }
 
         this.driver = driver;
-        
+        this.driver.isAssigned = true;
+
         return Result.ok<void>();
     }
 

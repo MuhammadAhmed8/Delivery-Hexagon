@@ -17,8 +17,4 @@ export class Driver extends Entity {
         return !this.isAssigned;
     }
 
-    public validate(): void {
-        
-    }
-
 }

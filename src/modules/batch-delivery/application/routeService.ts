@@ -18,27 +18,6 @@ export class RouteService {
         this._driverRepository = new DriverRespository();
     }
     
-    public async assignDriver(routeId: number, driverId: number): Promise<Result<void>> {
-        console.log("route id: ", routeId);
-        const route: Route = await this._routeRepository.findById(routeId);
-        const driver: Driver = await this._driverRepository.findById(driverId);
-
-        console.log(driver,"my driver");
-
-        const result: Result<void> = route.assignDriver(driver);
-
-        return result;
-
-    }
-
-    public async deliver(routeId: number, stopId: number): Promise<Result<void>> {
-
-        const route: Route = await this._routeRepository.findById(routeId);
-        console.log(route,"rrout")
-        const result: Result<void> = route.deliverToStop(stopId);
-
-        return result;
-
-    }
+    
 
 }

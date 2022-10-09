@@ -1,7 +1,10 @@
 import { Body, Controller, Param, Post, Put, Res } from "@nestjs/common"
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { Response } from "express";
 import { BaseController } from "src/lib/base/controller";
 import { Result } from "src/lib/types/result";
+import { AssignDriverCommand } from "../../application/commands/AssignDriverCommand";
+import { DeliverToStopCommand } from "../../application/commands/DeliverToStopCommand";
 import { RouteService } from "../../application/routeService"
 
 
@@ -10,7 +13,7 @@ export class RouteController extends BaseController{
 
     private _routeService: RouteService;
 
-    constructor(){
+    constructor(private readonly _commandBus: CommandBus, private readonly _queryBus: QueryBus){
         super();
         this._routeService = new RouteService();
     }
@@ -20,7 +23,7 @@ export class RouteController extends BaseController{
         
         const {driverId} = body;
 
-        const result: Result<void> = await this._routeService.assignDriver(routeId, driverId);
+        const result: Result<void> = await this._commandBus.execute(new AssignDriverCommand(driverId, routeId));
 
         if(result.isFailure){
             return this.fail(result.error,res);
@@ -38,7 +41,7 @@ export class RouteController extends BaseController{
     @Put('/:id/stop/:stopId/delivery')
     public async deliverToStop(@Param('id') routeId: number, @Param('stopId') stopId: number,  @Res() res: Response){
         
-        const result: Result<void> = await this._routeService.deliver(+routeId, +stopId);
+        const result: Result<void> = await this._commandBus.execute(new DeliverToStopCommand(stopId, routeId));
 
         if(result.isFailure){
             return this.fail(result.error,res);

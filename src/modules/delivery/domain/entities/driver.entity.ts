@@ -1,4 +1,4 @@
-import { Entity } from "src/lib/base/entities/entity";
+import { Entity } from "../../../../lib/base/entities/entity";
 
 export class Driver extends Entity {
 

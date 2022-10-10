@@ -1,9 +1,8 @@
-import { Entity } from "src/lib/base/entities/entity";
+import { Entity } from "../../../../lib/base/entities/entity";
 import { Stop } from "./stop";
 import { Location } from "../value-objects/location";
 import { Driver } from "./driver.entity";
-import { Result } from "src/lib/types/result";
-import { CustomError } from "src/lib/types/error";
+import { Result } from "../../../../lib/types/result";
 import { DomainErrors } from "../errors";
 import { BadRequestException } from "@nestjs/common";
 
@@ -17,12 +16,13 @@ export enum RouteStatus {
 export class Route extends Entity{
 
     
-    private readonly origin: Location;
-    private readonly trackingId: string;
-    private readonly title: string;
-    private readonly stops: Stop[];
-    private readonly status: RouteStatus;
-    private driver: Driver;
+    private readonly _origin: Location;
+    private readonly _trackingId: string;
+    private readonly _title: string;
+    private readonly _stops: Stop[];
+    private _status: RouteStatus;
+    private _driver: Driver;
+
     
     constructor(id: number, trackingId: string, title: string, stops: Stop[]){
         super(id);
@@ -31,11 +31,18 @@ export class Route extends Entity{
         //     throw new BadRequestException();
         // }
         
-        this.trackingId = trackingId;
-        this.title = title;
-        this.stops = stops;
+        this._trackingId = trackingId;
+        this._title = title;
+        this._stops = stops;
     }
 
+    public get stops(): ReadonlyArray<Stop>{
+        return this.stops;
+    }
+
+    public get driver(): Driver{
+        return this._driver;
+    }
 
     public assignDriver(driver: Driver): Result<void> {
 
@@ -43,15 +50,15 @@ export class Route extends Entity{
             return Result.fail<void>(DomainErrors.DriverAlreadyAssignedError);
         }
 
-        this.driver = driver;
-        this.driver.isAssigned = true;
+        this._driver = driver;
+        this._driver.isAssigned = true;
 
         return Result.ok<void>();
     }
 
     public deliverToStop(stopId: number): Result<void>{
 
-        const stop: Stop = this.stops.find((stop)=>stop.id == stopId);
+        const stop: Stop = this.findStop(stopId);
 
         if(!stop){
             return Result.fail<void>(DomainErrors.StopNotFoundError);
@@ -59,6 +66,10 @@ export class Route extends Entity{
 
         return stop.deliver();
 
+    }
+
+    public findStop(stopId: number): Stop {
+       return this._stops.find((stop)=>stop.id == stopId);
     }
 
     

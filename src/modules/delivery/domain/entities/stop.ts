@@ -1,5 +1,5 @@
-import { Entity } from "src/lib/base/entities/entity";
-import { Result } from "src/lib/types/result";
+import { Entity } from "../../../../lib/base/entities/entity";
+import { Result } from "../../../../lib/types/result";
 import { DomainErrors } from "../errors";
 import { Location } from "../value-objects/location";
 
@@ -13,15 +13,19 @@ export class Stop extends Entity{
     
     private readonly location: Location;
     private readonly customerId: number;
-    private status: StopStatus;
+    private _status: StopStatus;
 
+    public get status(): StopStatus {
+        return this._status;
+    }
+    
     public deliver(): Result<void>{
         
         if(this.status === StopStatus.DELIVERED){
             return Result.fail<void>(DomainErrors.StopAlreadyDeliveredError);
         }
 
-        this.status = StopStatus.DELIVERED;
+        this._status = StopStatus.DELIVERED;
 
         return Result.ok<void>();
     }

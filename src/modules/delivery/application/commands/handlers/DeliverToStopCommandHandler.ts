@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Result } from 'src/lib/types/result';
-import { Route } from 'src/modules/batch-delivery/domain❤️/entities/route.entity';
-import { IRouteRepository } from 'src/modules/batch-delivery/domain❤️/ports/IRouteRepository';
+import { Route } from 'src/modules/delivery/domain/entities/route.entity';
+import { IRouteRepository } from 'src/modules/delivery/domain/ports/IRouteRepository';
 import { DeliverToStopCommand } from '../DeliverToStopCommand';
 
 @CommandHandler(DeliverToStopCommand)

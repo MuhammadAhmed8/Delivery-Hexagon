@@ -1,5 +1,5 @@
-import { Driver } from "../../domain❤️/entities/driver.entity";
-import { IDriverRepository } from "../../domain❤️/ports/IDriverRepository";
+import { Driver } from "../../domain/entities/driver.entity";
+import { IDriverRepository } from "../../domain/ports/IDriverRepository";
 
 export class DriverRespository implements IDriverRepository {
 

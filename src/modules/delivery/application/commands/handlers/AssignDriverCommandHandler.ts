@@ -1,12 +1,12 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Result } from 'src/lib/types/result';
-import { Driver } from 'src/modules/batch-delivery/domain❤️/entities/driver.entity';
-import { Route } from 'src/modules/batch-delivery/domain❤️/entities/route.entity';
-import { IDriverRepository } from 'src/modules/batch-delivery/domain❤️/ports/IDriverRepository';
-import { IRouteRepository } from 'src/modules/batch-delivery/domain❤️/ports/IRouteRepository';
-import { DriverRespository } from 'src/modules/batch-delivery/persistence/repositories/DriverRepository';
-import { RouteRespository } from 'src/modules/batch-delivery/persistence/repositories/RouteRepository';
+import { Driver } from 'src/modules/delivery/domain/entities/driver.entity';
+import { Route } from 'src/modules/delivery/domain/entities/route.entity';
+import { IDriverRepository } from 'src/modules/delivery/domain/ports/IDriverRepository';
+import { IRouteRepository } from 'src/modules/delivery/domain/ports/IRouteRepository';
+import { DriverRespository } from 'src/modules/delivery/persistence/repositories/DriverRepository';
+import { RouteRespository } from 'src/modules/delivery/persistence/repositories/RouteRepository';
 import { AssignDriverCommand } from '../AssignDriverCommand';
 
 @CommandHandler(AssignDriverCommand)

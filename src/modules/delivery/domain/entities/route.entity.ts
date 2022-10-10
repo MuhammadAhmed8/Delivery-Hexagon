@@ -1,6 +1,4 @@
 import { Entity } from "src/lib/base/entities/entity";
-import { Delivery } from "../value-objects/delivery";
-import { RouteSpecification } from "../value-objects/routeSpecification";
 import { Stop } from "./stop";
 import { Location } from "../value-objects/location";
 import { Driver } from "./driver.entity";
@@ -18,6 +16,7 @@ export enum RouteStatus {
 
 export class Route extends Entity{
 
+    
     private readonly origin: Location;
     private readonly trackingId: string;
     private readonly title: string;

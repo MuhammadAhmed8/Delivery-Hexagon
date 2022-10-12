@@ -1,6 +1,6 @@
-import { Route } from "../../domain/entities/route.entity";
-import { Stop } from "../../domain/entities/stop";
-import { IRouteRepository } from "../../domain/ports/IRouteRepository";
+import { Route } from "../../../../domain/entities/route.entity";
+import { Stop } from "../../../../domain/entities/stop";
+import { IRouteRepository } from "../../../../application/out-ports/IRouteRepository";
 
 export class RouteRespository implements IRouteRepository {
 

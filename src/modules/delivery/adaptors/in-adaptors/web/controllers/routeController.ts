@@ -3,6 +3,7 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { Response } from "express";
 import { BaseController } from "src/lib/base/controller";
 import { Result } from "src/lib/types/result";
+import { RouteService } from "src/modules/delivery/application/services/route.service";
 import { AssignDriverCommand } from "../../application/commands/AssignDriverCommand";
 import { DeliverToStopCommand } from "../../application/commands/DeliverToStopCommand";
 
@@ -10,7 +11,7 @@ import { DeliverToStopCommand } from "../../application/commands/DeliverToStopCo
 @Controller('/route')
 export class RouteController extends BaseController{
 
-    constructor(private readonly _commandBus: CommandBus, private readonly _queryBus: QueryBus){
+    constructor(private readonly _routeService: RouteService){
         super();
     }
 

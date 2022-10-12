@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
-import { RouteController } from "./web/controllers/routeController";
-import { CommandHandlers } from "./application/commands/handlers";
+import { RouteController } from "./adaptors/in-adaptors/web/controllers/routeController";
 import { CqrsModule } from "@nestjs/cqrs";
-import { RouteRespository } from "./persistence/repositories/RouteRepository";
-import { DriverRespository } from "./persistence/repositories/DriverRepository";
+import { RouteRespository } from "./adaptors/out-adaptors/persistence/repositories/RouteRepository";
+import { DriverRespository } from "./adaptors/out-adaptors/persistence/repositories/DriverRepository";
+import { RouteService } from "./application/route.service";
 
 @Module({
     imports: [CqrsModule],
@@ -17,7 +17,7 @@ import { DriverRespository } from "./persistence/repositories/DriverRepository";
             provide: 'IDriverRespository',
             useClass: DriverRespository
         },
-        ...CommandHandlers
+        RouteService
     ]
 })
 export class DeliveryModule {}

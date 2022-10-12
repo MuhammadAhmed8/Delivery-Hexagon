@@ -1,4 +1,4 @@
-import { Route } from "../entities/route.entity";
+import { Route } from "../../domain/entities/route.entity";
 
 /*
     Repository shouldn't be correlated with tables. Each domain aggregate

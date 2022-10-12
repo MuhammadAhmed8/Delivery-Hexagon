@@ -1,4 +1,4 @@
-import { Driver } from "../entities/driver.entity";
+import { Driver } from "../../domain/entities/driver.entity";
 
 /*
     Repository shouldn't be correlated with tables. Each domain aggregate

@@ -1,9 +1,10 @@
 # DOMAIN DRIVEN DESIGN WITH HEXAGONAL ARCHITECTURE
 
-<img src="https://8thlight.com/blog/assets/posts/2021-05-18-a-color-coded-guide-to-ports-and-adapters/ports-and-adapters-906034dd0d7b95453b0426613281116f6cf9a371e6b82f2abb8d2eada800d8dd.svg" alt="Alt text" title="Optional title">
-
 Ports and Adapters
+
 Ports and Adapters is like a layered architecture, but it inserts ports to invert the direction of dependencies. It inserts ports between your controller and your application, as well as between your application and your database adapter or ORM.
+
+<img src="https://8thlight.com/blog/assets/posts/2021-05-18-a-color-coded-guide-to-ports-and-adapters/ports-and-adapters-906034dd0d7b95453b0426613281116f6cf9a371e6b82f2abb8d2eada800d8dd.svg" alt="Alt text" title="Optional title">
 
 A port is a metaphor for an Operating System port. In this example, a port is simply an interface. However, you could also substitute a duck type, no problem.
 
